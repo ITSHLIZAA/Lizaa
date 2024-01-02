@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumen</title>
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+<body>
+    <h2>Enhypen</h2>
+    <select id="pilihan" onchange="cetakGambar()">
+        <option value="">---PILIH---</option>
+        <option value="Jake">Jake</option>
+        <option value="Sunghoon">Sunghoon</option>
+        <option value="Jay">Jay</option>
+        <option value="Niki">Niki</option>
+        <option value="Heesung">Heesung</option>
+        <option value="Suno">Suno</option>
+        <option value="Jungwoon">Jungwoon</option>
+    </select>
+    <img id="image">
+    <script>
+        function cetakGambar(){
+            let dropdown = document.getElementById("pilihan").value;
+            let gambar = document.getElementById("image");
+
+            if(dropdown == "Jake"){
+                alert("Ini Gambar Jake");
+                gambar.setAttribute("src", "img/Jake.jpg");
+            } else if(dropdown == "Sunghoon"){
+                alert("Ini Gambar Sunghoon");
+                gambar.setAttribute("src", "img/Sunghoon.jpg");
+            } else if(dropdown == "Jay"){
+                alert("Ini Gambar Jay");
+                gambar.setAttribute("src", "img/Jay.jpg");
+            } else if(dropdown == "Niki"){
+                alert("Ini Gambar Niki");
+                gambar.setAttribute("src", "img/Niki.jpg");
+            } else if(dropdown == "Heesung"){
+                alert("Ini Gambar Heesung");
+                gambar.setAttribute("src", "img/Heesung.jpg");
+            } else if(dropdown == "Suno"){
+                alert("Ini Gambar Suno");
+                gambar.setAttribute("src", "img/Suno.jpg");
+            } else if(dropdown == "Jungwoon"){
+                alert("Ini Gambar Jungwoon");
+                gambar.setAttribute("src", "img/Jungwoon.jpg");
+            }
+        }
+    </script>
+</body>
+</html>

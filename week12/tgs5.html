@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <link rel="stylesheet" href="css/style2.css">
+</head>
+<body>
+
+  <h2>Formulir Pemesanan Tiket</h2>
+
+  <form id="bookingForm" onsubmit="return validateForm()">
+    <label for="nama">Nama Pelanggan:</label>
+    <input type="text" id="nama" name="nama" maxlength="30" required>
+    <span id="namaError" class="error"></span>
+    <br>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span id="emailError" class="error"></span>
+    <br>
+    <br>
+    <label for="jam">Jam Keberangkatan:</label>
+    <input type="text" id="jam" name="jam" placeholder="Format: HH.MM" required>
+    <span id="jamError" class="error"></span>
+    <br>
+    <br>
+    <label for="tujuan">Tujuan Keberangkatan:</label>
+    <input type="text" id="tujuan" name="tujuan" required>
+    <span id="tujuanError" class="error"></span>
+    <br>
+    <br>
+    <label for="jumlah">Jumlah Tiket:</label>
+    <input type="number" id="jumlah" name="jumlah" min="1" max="10" required>
+    <span id="jumlahError" class="error"></span>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="result" style="display:none;">
+    <h3>Data Pemesanan Tiket:</h3>
+    <p id="resultNama"></p>
+    <p id="resultEmail"></p>
+    <p id="resultJam"></p>
+    <p id="resultTujuan"></p>
+    <p id="resultJumlah"></p>
+  </div>
+
+  <script>
+    function validateForm() {
+      var nama = document.getElementById('nama').value;
+      var email = document.getElementById('email').value;
+      var jam = document.getElementById('jam').value;
+      var tujuan = document.getElementById('tujuan').value;
+      var jumlah = document.getElementById('jumlah').value;
+
+      document.getElementById('namaError').innerHTML = "";
+      document.getElementById('emailError').innerHTML = "";
+      document.getElementById('jamError').innerHTML = "";
+      document.getElementById('tujuanError').innerHTML = "";
+      document.getElementById('jumlahError').innerHTML = "";
+
+      var isValid = true;
+
+      // Nama Pelanggan validation
+      if (nama.length == 0 || nama.length > 30) {
+        document.getElementById('namaError').innerHTML = "Nama harus diisi dan maksimal 30 karakter.";
+        isValid = false;
+      }
+
+      // Email validation
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').innerHTML = "Format email tidak valid.";
+        isValid = false;
+      }
+
+      // Jam Keberangkatan validation
+      var jamRegex = /^(0[0-9]|1[0-9]|2[0-3])\.[0-5][0-9]$/;
+      if (!jamRegex.test(jam)) {
+        document.getElementById('jamError').innerHTML = "Format jam tidak valid (HH.MM).";
+        isValid = false;
+      }
+
+      // Tujuan Keberangkatan validation
+      if (tujuan.length == 0) {
+        document.getElementById('tujuanError').innerHTML = "Tujuan keberangkatan harus diisi.";
+        isValid = false;
+      }
+
+      // Jumlah Tiket validation
+      if (jumlah < 1 || jumlah > 10) {
+        document.getElementById('jumlahError').innerHTML = "Jumlah tiket harus antara 1 dan 10.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Tampilkan data setelah submit jika valid
+        document.getElementById('resultNama').innerText = "Nama Pelanggan: " + nama;
+        document.getElementById('resultEmail').innerText = "Email: " + email;
+        document.getElementById('resultJam').innerText = "Jam Keberangkatan: " + jam;
+        document.getElementById('resultTujuan').innerText = "Tujuan Keberangkatan: " + tujuan;
+        document.getElementById('resultJumlah').innerText = "Jumlah Tiket: " + jumlah;
+
+        // Sembunyikan form
+        document.getElementById('bookingForm').style.display = "none";
+
+        // Tampilkan hasil
+        document.getElementById('result').style.display = "block";
+      }
+
+      return false; // Agar form tidak mengirimkan permintaan ke server
+    }
+  </script>
+
+</body>
+</html>
